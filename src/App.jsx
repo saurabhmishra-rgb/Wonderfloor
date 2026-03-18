@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import ARVisualizer from './components/ARVisualizer'; // Assuming you have this component
+import ARVisualizer from './components/ARVisualizer'; 
 
 // --- 1. Import all local images from your assets folder ---
-// import Auditorium from './assets/Auditorium-Flooring_01.jpg';
+// Note: Ensure exact capitalization matches your actual files to avoid live deployment errors
 import Hospital from './assets/Hospital_02.jpg';
 import office02 from './assets/Office-Flooring_02.jpg';
 import residential03 from './assets/Residential-Flooring_03.jpg';
@@ -36,7 +36,6 @@ function App() {
 
   // --- 2. Update demoRooms to use the imported local images ---
   const demoRooms = [
-    // { id: 1, name: 'Hospital Room', img: Auditorium },
     { id: 2, name: 'Hospital', img: Hospital },
     { id: 4, name: 'Office Space', img: office02 },
     { id: 7, name: 'Residential', img: residential03 },
@@ -55,10 +54,9 @@ function App() {
     }
   };
 
-  // --- 3. Updated Demo Click Handler (No proxy needed for local files) ---
+  // --- 3. Updated Demo Click Handler ---
   const handleDemoRoomClick = async (imgUrl) => {
     try {
-      // Fetch the local asset directly
       const response = await fetch(imgUrl);
       const blob = await response.blob();
       const file = new File([blob], "demo_room.jpg", { type: "image/jpeg" });
@@ -74,21 +72,10 @@ function App() {
   return (
     <div className="relative max-w-[1300px] mx-auto px-4 sm:px-6 py-12 font-sans text-gray-800 bg-white min-h-screen flex flex-col overflow-x-hidden">
       
-      {/* Top Left Logo */}
-      {/* <div className="absolute top-4 left-4 sm:top-8 sm:left-6 md:top-12 md:left-6 z-50">
-        <img 
-          src="https://www.wonderfloor.co.in/assets/img/logo/logo.png" 
-          alt="Wonderfloor Logo" 
-          className="h-8 sm:h-10 md:h-12 object-contain"
-        />
-      </div> */}
-      
       {/* Top Section: Responsive Stack to Side-by-Side */}
-      {/* CHANGED: Swapped lg:items-center for lg:items-start to pull left content up */}
       <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8 lg:gap-16 mt-16 sm:mt-20 md:mt-24 mb-16 sm:mb-24 w-full">
         
         {/* Left Column - Heading & Controls */}
-        {/* CHANGED: Added lg:-mt-2 to nudge it precisely into alignment with the inner box */}
         <div className="w-full lg:w-[450px] flex flex-col gap-6 shrink-0 mt-8 lg:mt-0 lg:-mt-2">
           
           <h1 className="text-[36px] sm:text-[40px] lg:text-[46px] font-bold text-[#202938] mb-2 tracking-tight text-center lg:text-left leading-tight">
@@ -106,12 +93,11 @@ function App() {
             </li>
           </ul>
           
-          {/* UPDATED Primary Upload Button */}
+          {/* Primary Upload Button */}
           <button 
             onClick={handleUploadClick}
             className="cursor-pointer bg-[#0c5bc6] hover:bg-[#09479e] text-white font-bold py-3.5 px-6 rounded-[8px] border-[2.5px] border-[#4b8cf3] text-[17px] tracking-wide transition duration-200 w-full lg:w-[340px] flex items-center justify-center gap-2 shadow-sm"
           >
-            {/* Custom Camera Icon with Plus Sign */}
             <svg className="w-[26px] h-[26px]" viewBox="0 0 24 24" fill="currentColor">
               <path d="M4 4h3v2H5v13h14V9h-2V7h3a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" />
               <path d="M12 20a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0-2a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM9 2h2v3H9V2zM7 4V2h2v2H7z" />
@@ -126,12 +112,6 @@ function App() {
             ref={fileInputRef}
             onChange={handleFileChange}
           />
-
-          {/* Secondary QR Button */}
-          {/* <button className="cursor-pointer bg-white border border-gray-200 hover:bg-gray-50 text-gray-500 py-3.5 px-6 rounded-md text-[14px] sm:text-[15px] font-medium transition duration-200 w-full lg:w-[340px] flex items-center justify-center gap-3">
-            <svg className="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-            <span className="truncate">Or scan a QR code to upload pictures</span>
-          </button> */}
         </div>
 
         {/* Right Column - Mock UI Graphic */}
@@ -142,7 +122,7 @@ function App() {
           {/* Floor */}
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-[#555555]"></div>
           
-          {/* Left White Drawer Element (Scaled up) */}
+          {/* Left White Drawer Element */}
           <div className="absolute bottom-20 left-36 w-56 h-24 bg-white flex justify-center pt-3 shadow-sm border border-gray-100">
              <div className="w-12 h-3.5 bg-[#cbd5e1] rounded-full"></div>
              {/* Checkmark Circle */}
@@ -151,12 +131,12 @@ function App() {
              </div>
           </div>
 
-          {/* Right Brown Boxes Element (Scaled up) */}
+          {/* Right Brown Boxes Element */}
           <div className="absolute bottom-20 right-24 w-48 h-32 bg-[#b48d66] flex flex-wrap border-t border-l border-[#9c7956]">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="w-1/2 h-1/2 border-r border-b border-[#9c7956] flex items-center pl-3 relative">
                 <div className="w-2 h-2 rounded-full bg-white/60"></div>
-                {/* Overlay Checkmark on bottom right box */}
+                {/* Overlay Checkmark */}
                 {i === 4 && (
                   <div className="absolute -bottom-3 -right-3 w-8 h-8 bg-white border-2 border-blue-200 rounded-full flex items-center justify-center">
                     <div className="w-3.5 h-3.5 border-2 border-blue-400 rounded-sm"></div>
@@ -166,7 +146,7 @@ function App() {
             ))}
           </div>
 
-          {/* Top floating White Search/Filter Box (Scaled up) */}
+          {/* Top floating White Search/Filter Box */}
           <div className="absolute top-20 left-36 w-64 h-14 bg-white flex items-center px-5 shadow-sm border border-gray-100">
             <div className="w-24 h-2 bg-gray-200 rounded-full"></div>
             {/* Outline Circle */}
@@ -175,11 +155,10 @@ function App() {
             </div>
           </div>
 
-          {/* Left Side Floating Menu Overlay (Scaled up) */}
+          {/* Left Side Floating Menu Overlay */}
           <div className="absolute left-16 top-16 w-[70px] bg-[#e2e2e2] rounded-lg shadow-lg flex flex-col items-center py-4 gap-4 z-10 border border-gray-300">
              <div className="w-12 h-12 border-[3px] border-[#fc6c3f] bg-[#9cbdb9] rounded-sm relative"></div>
              <div className="w-12 h-12 bg-[#557e87] rounded-sm relative">
-                {/* Pointer Hand Icon */}
                 <svg className="absolute -bottom-5 -right-5 w-10 h-10 text-white drop-shadow-md z-20" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 21a.5.5 0 01-.5-.5v-4.79l-2.15 2.15a.5.5 0 01-.7 0l-1.41-1.42a.5.5 0 010-.7l6.06-6.06a.5.5 0 01.7 0l6.06 6.06a.5.5 0 010 .7l-1.41 1.41a.5.5 0 01-.7 0L17.5 15.71V20.5a.5.5 0 01-.5.5h-3.5zM4 10.5a6.5 6.5 0 1113 0H4z" /></svg>
              </div>
              <div className="w-12 h-12 bg-white rounded-sm shadow-inner"></div>
