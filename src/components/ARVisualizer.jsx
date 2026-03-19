@@ -208,7 +208,7 @@ const ARVisualizer = ({ closeModal, initialImage }) => {
             
             {/* WIDER: max-w changed to 98% to let it stretch almost completely to the edges */}
             <div 
-              className="relative flex flex-col bg-white shadow-xl rounded-md overflow-hidden max-w-[98%]"
+              className="relative flex flex-col bg-white shadow-xl rounded-md overflow-hidden  max-w-[98%]"
               style={{ 
                 aspectRatio: '4/3', 
                 maxHeight: '100%' 
